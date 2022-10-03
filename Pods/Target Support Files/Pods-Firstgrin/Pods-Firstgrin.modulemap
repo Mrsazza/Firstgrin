@@ -1,0 +1,6 @@
+framework module Pods_Firstgrin {
+  umbrella header "Pods-Firstgrin-umbrella.h"
+
+  export *
+  module * { export * }
+}
