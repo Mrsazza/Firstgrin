@@ -35,6 +35,7 @@ struct Doctor: Identifiable, Codable {
     let providerTypes: [String]?
     let locations: [Location]?
     let onlineProfiles: [JSONAny]?
+    let treatmentsPerformed: [TreatmentsPerformed]?
 
     enum CodingKeys: String, CodingKey {
         case npi
@@ -48,6 +49,7 @@ struct Doctor: Identifiable, Codable {
         case providerTypes = "provider_types"
         case locations
         case onlineProfiles = "online_profiles"
+        case treatmentsPerformed = "treatments_performed"
     }
 }
 
@@ -150,6 +152,12 @@ struct Specialty: Codable {
         case providerType = "provider_type"
         case isPrimary = "is_primary"
     }
+}
+
+
+// MARK: - TreatmentsPerformed
+struct TreatmentsPerformed: Codable {
+    let display, uuid: String
 }
 
 // MARK: - Encode/decode helpers
