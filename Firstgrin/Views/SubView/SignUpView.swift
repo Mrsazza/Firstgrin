@@ -80,9 +80,7 @@ struct SignUpView: View {
                 viewRouter.currentPage = .homePage
             }
         }
-        
     }
-    
 }
 
 struct SignUpView_Previews: PreviewProvider {

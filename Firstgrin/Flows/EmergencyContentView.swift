@@ -52,8 +52,6 @@ struct EmergencyContentView: View {
     }
     
 }
-
-
 struct EmergencyGridView: View {
     let columns = [
         GridItem(.flexible()),

@@ -15,7 +15,6 @@ struct SignInView: View {
     
     @State var email = ""
     @State var password = ""
-    
     @State var signInProcessing = false
     @State var signInErrorMessage = ""
     

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1C4D673158A2F25AD9375C40 /* Pods_Firstgrin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556B831079820A898CD98E06 /* Pods_Firstgrin.framework */; };
+		38498B1D28F6191B00341D09 /* CardViewDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38498B1C28F6191B00341D09 /* CardViewDetails.swift */; };
+		38C62B0E28EB954A003F12DC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C62B0D28EB9549003F12DC /* CardView.swift */; };
+		38E954CF290D250F006D39B2 /* MapViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E954CE290D250F006D39B2 /* MapViews.swift */; };
 		790F5CA0279C529D00B584F0 /* HabitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790F5C9F279C529D00B584F0 /* HabitApp.swift */; };
 		790F5CA2279C529D00B584F0 /* DashboardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790F5CA1279C529D00B584F0 /* DashboardContentView.swift */; };
 		790F5CA4279C529E00B584F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 790F5CA3279C529E00B584F0 /* Assets.xcassets */; };
@@ -95,6 +98,9 @@
 
 /* Begin PBXFileReference section */
 		2A328BAB8A2B0F02DF5BBA7C /* Pods-Firstgrin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Firstgrin.debug.xcconfig"; path = "Target Support Files/Pods-Firstgrin/Pods-Firstgrin.debug.xcconfig"; sourceTree = "<group>"; };
+		38498B1C28F6191B00341D09 /* CardViewDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewDetails.swift; sourceTree = "<group>"; };
+		38C62B0D28EB9549003F12DC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		38E954CE290D250F006D39B2 /* MapViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViews.swift; sourceTree = "<group>"; };
 		556B831079820A898CD98E06 /* Pods_Firstgrin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Firstgrin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		790F5C9C279C529D00B584F0 /* Firstgrin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Firstgrin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		790F5C9F279C529D00B584F0 /* HabitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitApp.swift; sourceTree = "<group>"; };
@@ -386,6 +392,9 @@
 				FAE5703A28D6CA1500130009 /* LogoView.swift */,
 				FAE5703B28D6CA1500130009 /* SignUpView.swift */,
 				FAB348FF28E38DD800DDB482 /* ImageUrlView.swift */,
+				38C62B0D28EB9549003F12DC /* CardView.swift */,
+				38498B1C28F6191B00341D09 /* CardViewDetails.swift */,
+				38E954CE290D250F006D39B2 /* MapViews.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -534,10 +543,13 @@
 			files = (
 				FAE5704828D6CA1500130009 /* SettingsView.swift in Sources */,
 				798BEF18279CC5F900DA7E60 /* HabitListItem.swift in Sources */,
+				38E954CF290D250F006D39B2 /* MapViews.swift in Sources */,
 				FAAC7F5F28DC181C00C8B260 /* TestData.swift in Sources */,
+				38498B1D28F6191B00341D09 /* CardViewDetails.swift in Sources */,
 				FAE5704528D6CA1500130009 /* WebView.swift in Sources */,
 				798AD8CD279D9964008A9CA9 /* TrendingHabitsContentView.swift in Sources */,
 				FAE5702728D6C9FA00130009 /* RealtimeViewModel.swift in Sources */,
+				38C62B0E28EB954A003F12DC /* CardView.swift in Sources */,
 				79E08CC5279CD0A20044A715 /* StatsChartView.swift in Sources */,
 				790F5CA2279C529D00B584F0 /* DashboardContentView.swift in Sources */,
 				FAE5702628D6C9FA00130009 /* BabyProfileViewModel.swift in Sources */,

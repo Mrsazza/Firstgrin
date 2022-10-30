@@ -16,6 +16,7 @@ struct HabitApp: App {
     @StateObject var fireStoreVM = FirestoreViewModel()
     @StateObject var realtimeVM = RealtimeViewModel()
     @StateObject var storageVM = StorageViewModel()
+  
     
     // MARK: - Main rendering function
     var body: some Scene {
@@ -33,6 +34,7 @@ struct HabitApp: App {
                 .environmentObject(realtimeVM)
                 .environmentObject(manager)
                 .environmentObject(storageVM)
+               
         }
     }
 }

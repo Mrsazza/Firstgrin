@@ -54,14 +54,15 @@ struct Doctor: Identifiable, Codable {
 }
 
 // MARK: - EducationElement
-struct EducationElement: Codable {
+struct EducationElement: Hashable ,Codable {
+    
     let education: EducationEducation
     let type: JSONNull?
     let year: Int
 }
 
 // MARK: - EducationEducation
-struct EducationEducation: Codable {
+struct EducationEducation: Hashable, Codable {
     let name, uuid: String
 }
 
@@ -87,7 +88,8 @@ struct Insurance: Codable {
 }
 
 // MARK: - Location
-struct Location: Codable {
+struct Location: Codable, Identifiable {
+    var id = UUID().uuidString
     let uuid: String
     let name: JSONNull?
     let address: String
@@ -156,7 +158,8 @@ struct Specialty: Codable {
 
 
 // MARK: - TreatmentsPerformed
-struct TreatmentsPerformed: Codable {
+struct TreatmentsPerformed: Hashable ,Codable{
+//    var id = UUID().uuidString
     let display, uuid: String
 }
 

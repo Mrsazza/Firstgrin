@@ -6,22 +6,26 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct FindADentistView: View {
     @EnvironmentObject var realtimeVM: RealtimeViewModel
+    @State var showingSheet: Bool = false
+    
+   
+    
     var body: some View {
         NavigationView{
-            VStack{
+            ScrollView(.vertical, showsIndicators: false){
                 ForEach(realtimeVM.doctorsList?.doctor ?? [], id: \.id){ doctor in
-                    HStack{
-                        Text("name: \(doctor.firstName ?? "") \(doctor.lastName ?? "")")
-                        Spacer()
-                        VStack{
-                            Text(doctor.degrees?[0] ?? "")
-                            Text((doctor.specialties?[0])!.display)
-                        }
+                    Button {
+                        showingSheet.toggle()
+                    } label: {
+                        CardView(doctor: doctor)
+                            .sheet(isPresented: $showingSheet, content: {
+                                CardViewDetails(doctor: doctor, region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: (doctor.locations?[0].latitude)!, longitude: (doctor.locations?[0].longitude)!), span:  MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)))
+                            })
                     }
-                    .padding()
                 }
             }
             .navigationTitle("Find A dentist")
@@ -29,8 +33,8 @@ struct FindADentistView: View {
     }
 }
 
-struct FindADentistView_Previews: PreviewProvider {
-    static var previews: some View {
-        FindADentistView()
-    }
-}
+//struct FindADentistView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FindADentistView()
+//    }
+//}
