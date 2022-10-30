@@ -49,7 +49,7 @@ struct ArticleSubView: View{
                 ForEach(section.articleItems ?? [], id:\.id){ article in
                     ZStack(alignment: .bottomLeading){
                         ImageUrlView(url: article.itemThumbnail ?? "",width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
-                            .frame(width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
+                           // .frame(width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
                             .cornerRadius(10)
                         Text("\(article.itemTitle ?? "")")
                             .font(.subheadline)
@@ -78,34 +78,52 @@ struct ArticleDetailView: View{
     var topSectionHeight = UIScreen.screenHeight * 0.3
     @State var item:ArticleItem
     var body: some View{
-        VStack{
-            ZStack{
-                ImageUrlView(url: item.itemThumbnail ?? "", height: topSectionHeight)
-                VStack{
-                    HStack{
-                        Spacer()
-                        Button(action: {
-                            dismiss()
-                        }, label: {
-                            Image(systemName: "xmark")
-                                .font(.title2)
-                                .foregroundColor(.white)
-                                .padding()
-                        })
-                    }
-                    Spacer()
-                    Text(item.itemTitle ?? "")
-                        .font(.title3)
-                        .bold()
-                        .foregroundColor(.white)
-                        .padding(.bottom)
-                }
-            }
-            .frame(height: topSectionHeight)
+        VStack(alignment: .leading){
             ScrollView{
-                Text(item.itemDescription ?? "")
-                    .font(.body)
-            }.padding()
+                ZStack{
+                    ImageUrlView(url: item.itemThumbnail ?? "",width:UIScreen.screenWidth, height: topSectionHeight)
+                    VStack{
+                        HStack{
+                            Spacer()
+                            Button(action: {
+                                dismiss()
+                            }, label: {
+                                Image(systemName: "xmark")
+                                    .font(.title2)
+                                    .foregroundColor(.white)
+                                    .padding()
+                            })
+                        }
+                        Spacer()
+                        Text(item.itemTitle ?? "")
+                            .font(.title3)
+                            .bold()
+                            .foregroundColor(.white)
+                            .padding(.bottom)
+                    }
+                }
+                .frame(height: topSectionHeight)
+                .padding()
+                VStack(alignment: .leading, spacing: 15){
+                    ForEach(item.articleSections,id: \.id){articles in
+                        if articles.articleSectionHeader != nil {
+                            Text(articles.articleSectionHeader!)
+                                .font(.title2)
+                        }
+                        if articles.articleSectionImage != nil {
+                            ImageUrlView(url: articles.articleSectionImage!)
+                                .cornerRadius(10)
+                        }
+                        if !articles.articleSectionText.isEmpty{
+                            ForEach(articles.articleSectionText,  id: \.id){texts in
+                                Text(texts.sectionText.replacingOccurrences(of: "\\n", with: "\n"))
+                                    .font(.body)
+                            }
+                        }
+                    }
+                }
+                .padding(.horizontal,30)
+            }
         }
     }
 }

@@ -15,25 +15,50 @@ struct ArticleModel:Identifiable, Codable {
 
 // MARK: - Section
 struct Sections: Codable {
-    let sectionName, id: String?
     let articleItems: [ArticleItem]?
+    let id, sectionName: String
 
     enum CodingKeys: String, CodingKey {
-        case sectionName = "section_name"
-        case id
         case articleItems = "article_items"
+        case id
+        case sectionName = "section_name"
     }
 }
 
 // MARK: - ArticleItem
-struct ArticleItem:Identifiable, Codable {
-    let id = UUID().uuidString
-    let itemThumbnail, itemTitle, itemDescription: String?
+struct ArticleItem: Codable,Identifiable {
+    var id = UUID().uuidString
+    let articleSections: [ArticleSection]
+    let itemThumbnail, itemTitle: String?
 
     enum CodingKeys: String, CodingKey {
+        case articleSections = "article_sections"
         case itemThumbnail = "item_thumbnail"
         case itemTitle = "item_title"
-        case itemDescription = "item_description"
+    }
+}
+
+// MARK: - ArticleSection
+struct ArticleSection: Codable, Identifiable {
+    var id = UUID().uuidString
+    let articleSectionText: [ArticleSectionText]
+    let articleSectionHeader: String?
+    let articleSectionImage: String?
+
+    enum CodingKeys: String, CodingKey {
+        case articleSectionText = "article_section_text"
+        case articleSectionHeader = "article_section_header"
+        case articleSectionImage = "article_section_image"
+    }
+}
+
+// MARK: - ArticleSectionText
+struct ArticleSectionText: Codable, Identifiable {
+    var id = UUID().uuidString
+    let sectionText: String
+
+    enum CodingKeys: String, CodingKey {
+        case sectionText = "section_text"
     }
 }
 

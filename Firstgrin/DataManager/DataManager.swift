@@ -11,7 +11,7 @@ import Foundation
 
 /// Full Screen flow
 enum FullScreenMode: Int, Identifiable {
-    case createHabit, subscriptions, settings, trendingHabits
+    case createHabit, subscriptions, settings, trendingHabits, emergency
     var id: Int { hashValue }
 }
 

@@ -37,13 +37,13 @@ struct HabitListView: View {
                     manager.swipeActionsIndex = nil
                 }
             VStack(alignment: .center, spacing: 0) {
-                Capsule().frame(width: 35, height: 5).padding(10).opacity(0.2)
+                //Capsule().frame(width: 35, height: 5).padding(10).opacity(0.2)
                 if habitsData.count == 0 {
                     EmptyListView
                 } else {
                     ListView
                 }
-            }
+            }.padding(10)
         }.padding(.top, 5).onAppear {
             if !didValidateDailyHabits {
                 didValidateDailyHabits = true
@@ -56,7 +56,7 @@ struct HabitListView: View {
     private var ListView: some View {
         VStack(alignment: .center) {
             HStack {
-                Text("Habits List").padding(.horizontal, 20).font(.headline)
+                Text("Log List").padding(.horizontal, 20).font(.headline)
                 Spacer()
             }
             ScrollView(.vertical, showsIndicators: false) {
@@ -77,8 +77,8 @@ struct HabitListView: View {
         VStack {
             Spacer()
             Image(systemName: "list.star").font(.largeTitle).padding(2)
-            Text("No Habits Yet").font(.title3).bold()
-            Text("You don't have any habits for today\nTap the '+' button below to create a habit")
+            Text("No Log Yet").font(.title3).bold()
+            Text("You don't have any log for today\nTap the '+' button below to create a new log")
                 .font(.subheadline).opacity(0.6)
             Spacer()
             Spacer()

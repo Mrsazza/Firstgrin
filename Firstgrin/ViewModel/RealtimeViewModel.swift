@@ -16,6 +16,7 @@ class RealtimeViewModel: ObservableObject{
     
     @Published var articles: ArticleModel?
     @Published var doctorsList: DoctorsList?
+    @Published var emergency: EmergencyModel?
     
     var database : String{
         #if DEV
@@ -41,6 +42,26 @@ class RealtimeViewModel: ObservableObject{
                 let jsonData = try JSONSerialization.data(withJSONObject: homnew as Any)
                 let result = try JSONDecoder().decode(ArticleModel.self, from: jsonData)
                 self.articles = result
+             //   self.homeDataLoaded = true
+                print(result)
+               // devPrint(self.docs)
+            }
+            catch let error{
+                print("Article Data decoding error : \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func fetchEmergencyData(){
+        self.dbReferance.child(database).observeSingleEvent(of: .value) { snapshot in
+            let homnew = snapshot.childSnapshot(forPath: "emergency").value
+           // guard let homeData = homnew as AnyObject? else { devPrint("Returning1"); return}
+          //  guard let homeJsonData = homeData.jsonData else { devPrint("Returning2"); return}
+            do {
+//                devPrint("Here")
+                let jsonData = try JSONSerialization.data(withJSONObject: homnew as Any)
+                let result = try JSONDecoder().decode(EmergencyModel.self, from: jsonData)
+                self.emergency = result
              //   self.homeDataLoaded = true
                 print(result)
                // devPrint(self.docs)

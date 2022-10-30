@@ -22,7 +22,7 @@ struct DashboardContentView: View {
     // MARK: - Main rendering function
     var body: some View {
         ZStack {
-            Color("brown").ignoresSafeArea()
+            Color("blue").ignoresSafeArea()
             if selectedTab == .home {
                 HomeTabView
             } else if selectedTab == .article{
@@ -57,6 +57,9 @@ struct DashboardContentView: View {
                         manager.fullScreenMode = nil
                     }
                 }
+            case .emergency:
+                EmergencyContentView()
+                    .environmentObject(manager)
             }
         }
     }
@@ -64,11 +67,19 @@ struct DashboardContentView: View {
     /// Dashboard/Home tab view
     private var HomeTabView: some View {
         ZStack{
-            VStack {
+            ScrollView {
                 HeaderTitle
-                HeaderBabyProfile
-                HeaderCalendarView
-                HabitListView(date: manager.selectedDate)
+                HeaderLottieView
+                VStack{
+                    HeaderBabyProfile
+                        .shadow(radius: 0.5)
+                    // HeaderCalendarView
+                    HabitListView(date: manager.selectedDate)
+                        .shadow(radius: 0.5)
+                }
+                .frame(height: UIScreen.screenHeight*0.5)
+                .background(Color("offwhite"))
+                .cornerRadius(20, corners: [.topLeft,.topRight])
             }
             VStack{
                 Spacer()
@@ -139,18 +150,45 @@ struct DashboardContentView: View {
     
     /// Header title
     private var HeaderTitle: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading) {
-                Text("Firstgrin").font(.largeTitle).bold()
-                Text(manager.selectedDate.headerTitle)
+        ZStack{
+            HStack {
+                Text("Firstgrin").font(.system(.largeTitle, design: .rounded)).fontWeight(.black)
+                    .foregroundColor(Color("offwhite"))
+//                Text(manager.selectedDate.headerTitle)
             }
-            Spacer()
-            Button {
-                manager.fullScreenMode = .settings
-            } label: {
-                Image(systemName: "gearshape.fill").font(.system(size: 18, weight: .medium))
-            }
-        }.padding(.horizontal).foregroundColor(Color("LightColor"))
+            HStack(alignment: .top) {
+                ZStack{
+                    Circle()
+                        .fill(Color.red)
+                        .frame(width: 40)
+                    Text("S")
+                        .font(.title3).bold()
+                }
+                Spacer()
+                Button {
+                    manager.fullScreenMode = .emergency
+                } label: {
+                    LottieView(name: "heal", playAnimation: .constant(true))
+                        .frame(width: 40,height: 40)
+//                    HStack{
+//                        Image(systemName: "exclamationmark.triangle.fill").font(.system(size: 18, weight: .medium))
+//                            .foregroundColor(.red)
+//                    }
+                }
+            }.padding(.horizontal).foregroundColor(Color("LightColor"))
+        }
+    }
+    
+    private var HeaderLottieView: some View{
+        ZStack{
+            LottieView(name: "moving-bubbles", playAnimation: .constant(true))
+                .frame(width: UIScreen.screenWidth,height: UIScreen.screenHeight*0.35)
+            LottieView(name: "hover-blob-orange", playAnimation: .constant(true))
+                .frame(height: UIScreen.screenHeight*0.26)
+            Text(manager.selectedDate.headerTitle)
+                .font(.system(size: 22, weight: .black,design: .rounded))
+                .foregroundColor(.white)
+        }
     }
     
     /// Header calendar view

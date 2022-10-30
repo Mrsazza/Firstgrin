@@ -102,7 +102,7 @@ extension Date {
     
     var headerTitle: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM, y"
+        formatter.dateFormat = "dd, MMMM"
         return formatter.string(from: self)
     }
     
@@ -129,5 +129,11 @@ extension String {
     var weekday: Int {
         if self == FrequencyType.sun.rawValue { return 1 }
         return FrequencyType(rawValue: self)!.sortId + 2
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
 }
