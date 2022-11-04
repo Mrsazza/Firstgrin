@@ -16,6 +16,8 @@ struct HabitApp: App {
     @StateObject var fireStoreVM = FirestoreViewModel()
     @StateObject var realtimeVM = RealtimeViewModel()
     @StateObject var storageVM = StorageViewModel()
+    @State var isTesting = false
+    
   
     
     // MARK: - Main rendering function
@@ -27,14 +29,19 @@ struct HabitApp: App {
 //                .environmentObject(realtimeVM)
 //                .environmentObject(manager)
 //                .environmentObject(storageVM)
-            DashboardContentView().environmentObject(manager)
-                .environment(\.managedObjectContext, manager.container.viewContext)
-                .environmentObject(viewRouter)
-                .environmentObject(fireStoreVM)
-                .environmentObject(realtimeVM)
-                .environmentObject(manager)
-                .environmentObject(storageVM)
-               
+            
+            //1Nov-2:11am
+            if isTesting {
+              TestView()
+            } else {
+                DashboardContentView().environmentObject(manager)
+                    .environment(\.managedObjectContext, manager.container.viewContext)
+                    .environmentObject(viewRouter)
+                    .environmentObject(fireStoreVM)
+                    .environmentObject(realtimeVM)
+                    .environmentObject(manager)
+                    .environmentObject(storageVM)
+            }
         }
     }
 }

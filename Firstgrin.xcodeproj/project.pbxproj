@@ -9,8 +9,12 @@
 /* Begin PBXBuildFile section */
 		1C4D673158A2F25AD9375C40 /* Pods_Firstgrin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556B831079820A898CD98E06 /* Pods_Firstgrin.framework */; };
 		38498B1D28F6191B00341D09 /* CardViewDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38498B1C28F6191B00341D09 /* CardViewDetails.swift */; };
+		38988CD72911B933005BF6B5 /*  TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38988CD62911B933005BF6B5 /*  TestView.swift */; };
+		38988CD92911B98E005BF6B5 /* MapView .swift in Sources */ = {isa = PBXBuildFile; fileRef = 38988CD82911B98E005BF6B5 /* MapView .swift */; };
+		38988CDB2911BACD005BF6B5 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38988CDA2911BACD005BF6B5 /* Coordinator.swift */; };
+		38988CDF2911BBF8005BF6B5 /* MapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38988CDE2911BBF8005BF6B5 /* MapViewRepresentable.swift */; };
+		38988CE12911CD9E005BF6B5 /* CoreLocationUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38988CE02911CD9E005BF6B5 /* CoreLocationUI.framework */; };
 		38C62B0E28EB954A003F12DC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C62B0D28EB9549003F12DC /* CardView.swift */; };
-		38E954CF290D250F006D39B2 /* MapViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E954CE290D250F006D39B2 /* MapViews.swift */; };
 		790F5CA0279C529D00B584F0 /* HabitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790F5C9F279C529D00B584F0 /* HabitApp.swift */; };
 		790F5CA2279C529D00B584F0 /* DashboardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790F5CA1279C529D00B584F0 /* DashboardContentView.swift */; };
 		790F5CA4279C529E00B584F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 790F5CA3279C529E00B584F0 /* Assets.xcassets */; };
@@ -99,8 +103,12 @@
 /* Begin PBXFileReference section */
 		2A328BAB8A2B0F02DF5BBA7C /* Pods-Firstgrin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Firstgrin.debug.xcconfig"; path = "Target Support Files/Pods-Firstgrin/Pods-Firstgrin.debug.xcconfig"; sourceTree = "<group>"; };
 		38498B1C28F6191B00341D09 /* CardViewDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewDetails.swift; sourceTree = "<group>"; };
+		38988CD62911B933005BF6B5 /*  TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " TestView.swift"; sourceTree = "<group>"; };
+		38988CD82911B98E005BF6B5 /* MapView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapView .swift"; sourceTree = "<group>"; };
+		38988CDA2911BACD005BF6B5 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		38988CDE2911BBF8005BF6B5 /* MapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRepresentable.swift; sourceTree = "<group>"; };
+		38988CE02911CD9E005BF6B5 /* CoreLocationUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocationUI.framework; path = System/Library/Frameworks/CoreLocationUI.framework; sourceTree = SDKROOT; };
 		38C62B0D28EB9549003F12DC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		38E954CE290D250F006D39B2 /* MapViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViews.swift; sourceTree = "<group>"; };
 		556B831079820A898CD98E06 /* Pods_Firstgrin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Firstgrin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		790F5C9C279C529D00B584F0 /* Firstgrin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Firstgrin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		790F5C9F279C529D00B584F0 /* HabitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitApp.swift; sourceTree = "<group>"; };
@@ -175,6 +183,7 @@
 				FAE5705728D6CC4D00130009 /* FirebaseDatabaseSwift in Frameworks */,
 				FAE5705528D6CC4D00130009 /* FirebaseDatabase in Frameworks */,
 				792655A9279F47550095C00B /* PurchaseKit.xcframework in Frameworks */,
+				38988CE12911CD9E005BF6B5 /* CoreLocationUI.framework in Frameworks */,
 				1C4D673158A2F25AD9375C40 /* Pods_Firstgrin.framework in Frameworks */,
 				FAE5705328D6CC4D00130009 /* FirebaseCrashlytics in Frameworks */,
 				FAE5705928D6CC4D00130009 /* FirebaseFirestore in Frameworks */,
@@ -190,6 +199,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38988CDC2911BAF8005BF6B5 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				38988CDD2911BB09005BF6B5 /* MapManager */,
+				790F5CB0279C536100B584F0 /* DataManager */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		38988CDD2911BB09005BF6B5 /* MapManager */ = {
+			isa = PBXGroup;
+			children = (
+				38988CDA2911BACD005BF6B5 /* Coordinator.swift */,
+				38988CDE2911BBF8005BF6B5 /* MapViewRepresentable.swift */,
+			);
+			path = MapManager;
+			sourceTree = "<group>";
+		};
 		790F5C93279C529D00B584F0 = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +239,7 @@
 		790F5C9E279C529D00B584F0 /* Firstgrin */ = {
 			isa = PBXGroup;
 			children = (
+				38988CDC2911BAF8005BF6B5 /* Manager */,
 				FAB348FA28E3896B00DDB482 /* Helper */,
 				FAB348F328E3878500DDB482 /* Class */,
 				FAAC7F5D28DC180C00C8B260 /* Data */,
@@ -220,7 +248,6 @@
 				790F5CAF279C535C00B584F0 /* Views */,
 				790F5CAE279C52B600B584F0 /* Flows */,
 				790F5CAD279C52AB00B584F0 /* Lifecycle */,
-				790F5CB0279C536100B584F0 /* DataManager */,
 				790F5CBC279CAEB600B584F0 /* Configurations */,
 				792655B0279F73460095C00B /* Info.plist */,
 				792655AE279F47A30095C00B /* Launch.storyboard */,
@@ -278,6 +305,8 @@
 				798AD8CA279D9465008A9CA9 /* ColorsGridView.swift */,
 				798AD8CE279DA60D008A9CA9 /* IconsGridView.swift */,
 				79E1BF4A27A0616200C0D07C /* ConfettiView.swift */,
+				38988CD82911B98E005BF6B5 /* MapView .swift */,
+				38988CD62911B933005BF6B5 /*  TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -313,6 +342,7 @@
 		DCA10AA8803325CDEC77794B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38988CE02911CD9E005BF6B5 /* CoreLocationUI.framework */,
 				556B831079820A898CD98E06 /* Pods_Firstgrin.framework */,
 			);
 			name = Frameworks;
@@ -394,7 +424,6 @@
 				FAB348FF28E38DD800DDB482 /* ImageUrlView.swift */,
 				38C62B0D28EB9549003F12DC /* CardView.swift */,
 				38498B1C28F6191B00341D09 /* CardViewDetails.swift */,
-				38E954CE290D250F006D39B2 /* MapViews.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -543,7 +572,6 @@
 			files = (
 				FAE5704828D6CA1500130009 /* SettingsView.swift in Sources */,
 				798BEF18279CC5F900DA7E60 /* HabitListItem.swift in Sources */,
-				38E954CF290D250F006D39B2 /* MapViews.swift in Sources */,
 				FAAC7F5F28DC181C00C8B260 /* TestData.swift in Sources */,
 				38498B1D28F6191B00341D09 /* CardViewDetails.swift in Sources */,
 				FAE5704528D6CA1500130009 /* WebView.swift in Sources */,
@@ -563,11 +591,14 @@
 				FAE5704A28D6CA1500130009 /* ContentView.swift in Sources */,
 				FAE5703028D6CA0700130009 /* ArticleModel.swift in Sources */,
 				FAE5704628D6CA1500130009 /* LogoView.swift in Sources */,
+				38988CD72911B933005BF6B5 /*  TestView.swift in Sources */,
+				38988CDB2911BACD005BF6B5 /* Coordinator.swift in Sources */,
 				FAE5704128D6CA1500130009 /* StatsView.swift in Sources */,
 				790F5CB2279C537200B584F0 /* DataManager.swift in Sources */,
 				79E1BF4B27A0616200C0D07C /* ConfettiView.swift in Sources */,
 				792655A8279F46330095C00B /* AppDelegate.swift in Sources */,
 				FAE5703F28D6CA1500130009 /* HomeView.swift in Sources */,
+				38988CD92911B98E005BF6B5 /* MapView .swift in Sources */,
 				FAE5704028D6CA1500130009 /* ArticleView.swift in Sources */,
 				790F5CBE279CAEC600B584F0 /* AppConfig.swift in Sources */,
 				FAE5704228D6CA1500130009 /* FindADentistView.swift in Sources */,
@@ -579,6 +610,7 @@
 				FA00E8C02906580F00841EBB /* LottieView.swift in Sources */,
 				FAB348F528E387AA00DDB482 /* ImageCache.swift in Sources */,
 				798AD8CF279DA60D008A9CA9 /* IconsGridView.swift in Sources */,
+				38988CDF2911BBF8005BF6B5 /* MapViewRepresentable.swift in Sources */,
 				FAE5702828D6C9FA00130009 /* ViewRouter.swift in Sources */,
 				FA55166B28F77B8B0009E268 /* EmergencyContentView.swift in Sources */,
 				790F5CB5279C555800B584F0 /* Database.xcdatamodeld in Sources */,

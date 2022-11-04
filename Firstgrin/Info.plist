@@ -17,5 +17,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Need your location to Use app</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
 </dict>
 </plist>
