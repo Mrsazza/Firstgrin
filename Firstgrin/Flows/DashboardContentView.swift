@@ -10,7 +10,7 @@ import CoreData
 
 // MARK: - Custom tab bar items
 enum CustomTabBarItem: String {
-    case home = "house", log = "chart.pie", article = "doc.circle", find = "magnifyingglass.circle", settings = "gearshape.circle"
+    case home = "house", log = "chart.pie", article = "doc.circle", find = "magnifyingglass.circle", settings = "gearshape.circle", shop = "cart.circle"
 }
 
 /// Main view for the app
@@ -31,12 +31,17 @@ struct DashboardContentView: View {
                 FindADentistView()
             } else if selectedTab == .settings{
                 SettingsContentView()
+            } else if selectedTab == .shop {
+                ShopContentView()
             }
             else {
                 StatsContentView().environmentObject(manager)
             }
             CustomTabBarView
                 .edgesIgnoringSafeArea(.bottom)
+        }
+        .onAppear {
+            print("width:\(UIScreen.screenWidth) , Height: \(UIScreen.screenHeight)")
         }
         
         /// Full modal screen flow
@@ -71,8 +76,6 @@ struct DashboardContentView: View {
                 HeaderTitle
                 HeaderLottieView
                 VStack{
-                    HeaderBabyProfile
-                        .shadow(radius: 0.5)
                     // HeaderCalendarView
                     HabitListView(date: manager.selectedDate)
                         .shadow(radius: 0.5)
@@ -88,65 +91,7 @@ struct DashboardContentView: View {
             }
         }
     }
-    
-    private var HeaderBabyProfile: some View{
-        ZStack{
-            Color.white
-            HStack{
-                Circle()
-                    .fill(Color.blue)
-                VStack(alignment: .leading){
-                    Text("Name: SAMANTHA")
-                    Text("Age: 2 month")
-                }
-                Spacer()
-            }
-            .padding()
-            HStack{
-                Spacer()
-                VStack{
-                    HStack{
-                        Button(action: {
-                            
-                        }, label: {
-                            HStack(spacing: 2){
-                                Image(systemName: "plus.circle")
-                                    .font(.caption)
-                                Text("Add")
-                                    .font(.caption2)
-                            }
-                        })
-                        
-                        Button(action: {
-                            
-                        }, label: {
-                            HStack(spacing: 2){
-                                Image(systemName: "pencil.circle")
-                                    .font(.caption)
-                                Text("Edit")
-                                    .font(.caption2)
-                            }
-                        })
-                        Button(action: {
-                            
-                        }, label: {
-                            HStack(spacing: 2){
-                                Image(systemName: "trash.circle")
-                                    .font(.caption)
-                                Text("Delete")
-                                    .font(.caption2)
-                            }.foregroundColor(.red)
-                        })
-                    }
-                    .padding(5)
-                    Spacer()
-                }
-            }
-        }
-        .cornerRadius(10)
-        .padding()
-        .frame(height: 90)
-    }
+        
     
     /// Header title
     private var HeaderTitle: some View {
@@ -157,12 +102,16 @@ struct DashboardContentView: View {
 //                Text(manager.selectedDate.headerTitle)
             }
             HStack(alignment: .top) {
-                ZStack{
-                    Circle()
-                        .fill(Color.red)
-                        .frame(width: 40)
-                    Text("S")
-                        .font(.title3).bold()
+                Button {
+                    manager.fullScreenMode = .settings
+                } label: {
+                    ZStack{
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 40)
+                        Text("S")
+                            .font(.title3).bold()
+                    }
                 }
                 Spacer()
                 Button {
@@ -185,9 +134,35 @@ struct DashboardContentView: View {
                 .frame(width: UIScreen.screenWidth,height: UIScreen.screenHeight*0.35)
             LottieView(name: "hover-blob-orange", playAnimation: .constant(true))
                 .frame(height: UIScreen.screenHeight*0.26)
-            Text(manager.selectedDate.headerTitle)
-                .font(.system(size: 22, weight: .black,design: .rounded))
-                .foregroundColor(.white)
+            VStack {
+                Text("Samantha")
+                    .font(.system(size: 32, weight: .black,design: .rounded))
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                    .frame(maxWidth: UIScreen.screenWidth * 0.4)
+                    .overlay(
+                        HStack {
+                            Spacer()
+                            Image(systemName: "repeat")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.white)
+                        }
+                            .offset(y: -UIScreen.screenHeight / 26.375)
+                    )
+                
+                    .overlay(
+                        VStack {
+                            Text("2yrs, 3mnth")
+                                .font(.system(size: 10, weight: .black,design: .rounded))
+                                .foregroundColor(.white)
+                            Text(manager.selectedDate.headerTitle)
+                                .font(.system(size: 14, weight: .black,design: .rounded))
+                                .foregroundColor(.white)
+                        }
+                            .offset(y: UIScreen.screenHeight / 26.375)
+                    )
+            }
         }
     }
     
@@ -260,7 +235,7 @@ struct DashboardContentView: View {
                             //Spacer()
                             TabBarItem(type: .find)
                           //  Spacer()
-                            TabBarItem(type: .settings)
+                            TabBarItem(type: .shop)
                         }
                        // Spacer()
                     }.padding(.horizontal)

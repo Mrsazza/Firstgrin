@@ -19,11 +19,12 @@ struct EmergencyContentView: View {
                     Spacer()
                 }
             }
+            .navigationBarHidden(true)
         }
         .task {
             realtimeVM.fetchEmergencyData()
         }
-        .navigationBarHidden(true)
+       
     }
     
     /// Header title
@@ -40,7 +41,7 @@ struct EmergencyContentView: View {
     }
     // Emergency Row
     private var EmergencyRow: some View{
-        ScrollView{
+        ScrollView {
             ForEach (realtimeVM.emergency?.emergencyRow ?? [], id:\.id){ row in
                 VStack(alignment: .leading){
                     Text(row.emergencyRowTitle ?? "")

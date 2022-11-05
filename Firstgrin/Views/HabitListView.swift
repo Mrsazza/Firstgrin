@@ -31,7 +31,7 @@ struct HabitListView: View {
     // MARK: - Main rendering function
     var body: some View {
         ZStack {
-            RoundedCorner(radius: 30, corners: [.topLeft, .topRight])
+            RoundedCorner(radius: 20, corners: [.topLeft, .topRight])
                 .foregroundColor(Color("ListColor")).ignoresSafeArea()
                 .shadow(color: Color.black.opacity(0.03), radius: 5, y: -5).onTapGesture {
                     manager.swipeActionsIndex = nil
