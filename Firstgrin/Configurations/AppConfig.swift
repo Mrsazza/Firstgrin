@@ -48,12 +48,12 @@ struct TrendingHabitModel {
 }
 
 let TrendingHabits: [TrendingHabitModel] = [
-    .init(name: "Brush & Floss", motto: "Keep your teeth & gums clean", colorIndex: 0, iconString: "brush"),
-    .init(name: "Read", motto: "Reading makes you smarter", colorIndex: 1, iconString: "read"),
-    .init(name: "New Language", motto: "Learn a new language", colorIndex: 2, iconString: "language"),
-    .init(name: "Walk your Dog", motto: "Walking is good for your pet", colorIndex: 3, iconString: "walk"),
-    .init(name: "Wake up Early", motto: "Be the first one to wake up", colorIndex: 4, iconString: "alarm"),
-    .init(name: "Yoga", motto: "Bend your mind, inspire yourself", colorIndex: 5, iconString: "yoga"),
-    .init(name: "Budgeting", motto: "Do not go over budget", colorIndex: 6, iconString: "budget"),
-    .init(name: "Sleep Early", motto: "You need at least 8+ hrs of sleep", colorIndex: 7, iconString: "sleep")
+    .init(name: "Brushing", motto: "Brush teeth for 2 minutes", colorIndex: 0, iconString: "brush"),
+    .init(name: "Flossing", motto: "Floss teeth", colorIndex: 1, iconString: "read"),
+    .init(name: "Mouth Wash", motto: "Mouth Wash your teeth for 2 days", colorIndex: 2, iconString: "language"),
+//    .init(name: "Walk your Dog", motto: "Walking is good for your pet", colorIndex: 3, iconString: "walk"),
+//    .init(name: "Wake up Early", motto: "Be the first one to wake up", colorIndex: 4, iconString: "alarm"),
+//    .init(name: "Yoga", motto: "Bend your mind, inspire yourself", colorIndex: 5, iconString: "yoga"),
+//    .init(name: "Budgeting", motto: "Do not go over budget", colorIndex: 6, iconString: "budget"),
+//    .init(name: "Sleep Early", motto: "You need at least 8+ hrs of sleep", colorIndex: 7, iconString: "sleep")
 ]

@@ -35,7 +35,7 @@ struct FindADentistView: View {
             .padding()
             
                 if selectedTab == .map {
-                    MapView(manager: $manager)
+                    NewMapView()
                 } else {
                     ScrollView(.vertical, showsIndicators: false){
                         ForEach(realtimeVM.doctorsList?.doctor ?? [], id: \.id){ doctor in

@@ -28,8 +28,8 @@ struct TrendingHabitsContentView: View {
     private var HeaderTitle: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
-                Text("Trending").font(.largeTitle).bold()
-                Text("Choose a habit or create one")
+                Text("Add New").font(.largeTitle).bold()
+                Text("Choose a log or create one")
             }
             Spacer()
             Button {
@@ -50,7 +50,7 @@ struct TrendingHabitsContentView: View {
                 Capsule().frame(width: 35, height: 5).padding(10).opacity(0.2)
                 ScrollView(.vertical, showsIndicators: false) {
                     Spacer(minLength: 10)
-                    LazyVGrid(columns: Array(repeating: GridItem(spacing: 0), count: 2), spacing: 20) {
+                    LazyVGrid(columns: Array(repeating: GridItem(spacing: 0), count: 1), spacing: 20) {
                         ForEach(0..<TrendingHabits.count, id: \.self) { index in
                             Button {
                                 if manager.isPremiumUser {
@@ -73,25 +73,29 @@ struct TrendingHabitsContentView: View {
     private func TrendingHabit(atIndex index: Int) -> some View {
         ZStack {
             AppConfig.colors[TrendingHabits[index].colorIndex].cornerRadius(18)
-                .padding(.horizontal, 10)
-            VStack(alignment: .center, spacing: 5) {
-                Image(uiImage: UIImage(named: TrendingHabits[index].iconString)!)
-                    .resizable().aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
-                    .padding(.vertical)
-                Text(TrendingHabits[index].name)
+              //  .padding(.horizontal, 10)
+            HStack{
+                VStack(alignment: .center, spacing: 5) {
+                    Image(uiImage: UIImage(named: TrendingHabits[index].iconString)!)
+                        .resizable().aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                       // .padding(.vertical)
+                    Text(TrendingHabits[index].name)
+                    Spacer()
+                }
+                .fixedSize(horizontal: false, vertical: true)
+             //   .frame(height: 125)
+                .frame(width: UIScreen.main.bounds.width/2 - 60)
+                .foregroundColor(Color("LightColor"))
+                .padding().overlay(
+                    Color("BackgroundColor").cornerRadius(18)
+                        .opacity(manager.isPremiumUser ? 0 : 0.4)
+                )
                 Text(TrendingHabits[index].motto).opacity(0.7)
-                    .font(.system(size: 14, weight: .light)).lineLimit(3)
+                    .font(.system(size: 24, weight: .light)).lineLimit(3)
+                    .foregroundColor(.white)
                 Spacer()
             }
-            .fixedSize(horizontal: false, vertical: true)
-            .frame(height: 125)
-            .frame(width: UIScreen.main.bounds.width/2 - 60)
-            .foregroundColor(Color("LightColor"))
-            .padding().overlay(
-                Color("BackgroundColor").cornerRadius(18)
-                    .opacity(manager.isPremiumUser ? 0 : 0.4)
-            )
             
             if manager.isPremiumUser == false {
                 VStack {

@@ -22,7 +22,7 @@ struct CardViewDetails: View {
     
     var body: some View {
         ZStack {
-            Color.red
+            Color.white
                 .ignoresSafeArea()
             VStack {
                 VStack {
@@ -101,9 +101,9 @@ struct SpotAnnotatonView: View {
     var selected: Bool = false
     var body: some View {
         ZStack {
-            Image(selected ? "MapPin" : "brush")
+            Image(selected ? "tooth-2" : "tooth")
                 .resizable()
-                .frame(width: 55, height: 55)
+                .frame(width: 50, height: 50)
         }
     }
 }
