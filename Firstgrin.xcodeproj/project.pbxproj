@@ -16,7 +16,6 @@
 		38988CE12911CD9E005BF6B5 /* CoreLocationUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38988CE02911CD9E005BF6B5 /* CoreLocationUI.framework */; };
 		38BFD90F2915CCF800E3738A /* ShopContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BFD90E2915CCF800E3738A /* ShopContentView.swift */; };
 		38BFD9112915D39F00E3738A /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BFD9102915D39F00E3738A /* CartView.swift */; };
-		38BFD9132915D3B300E3738A /* WishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BFD9122915D3B300E3738A /* WishlistView.swift */; };
 		38BFD9152915D5A200E3738A /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BFD9142915D5A200E3738A /* ShopView.swift */; };
 		38BFD9182915D83A00E3738A /* ProductCartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BFD9172915D83A00E3738A /* ProductCartRow.swift */; };
 		38BFD91A2915DAAD00E3738A /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BFD9192915DAAD00E3738A /* ProductCell.swift */; };
@@ -120,7 +119,6 @@
 		38988CE02911CD9E005BF6B5 /* CoreLocationUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocationUI.framework; path = System/Library/Frameworks/CoreLocationUI.framework; sourceTree = SDKROOT; };
 		38BFD90E2915CCF800E3738A /* ShopContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopContentView.swift; sourceTree = "<group>"; };
 		38BFD9102915D39F00E3738A /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
-		38BFD9122915D3B300E3738A /* WishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistView.swift; sourceTree = "<group>"; };
 		38BFD9142915D5A200E3738A /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		38BFD9172915D83A00E3738A /* ProductCartRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCartRow.swift; sourceTree = "<group>"; };
 		38BFD9192915DAAD00E3738A /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 			children = (
 				38BFD9142915D5A200E3738A /* ShopView.swift */,
 				38BFD9102915D39F00E3738A /* CartView.swift */,
-				38BFD9122915D3B300E3738A /* WishlistView.swift */,
 				38BFD9172915D83A00E3738A /* ProductCartRow.swift */,
 				38BFD9192915DAAD00E3738A /* ProductCell.swift */,
 				38BFD91B2915DB8D00E3738A /* ProductDetail.swift */,
@@ -644,7 +641,6 @@
 				38BFD9202915DBF900E3738A /* RatingBlock.swift in Sources */,
 				FAE5704028D6CA1500130009 /* ArticleView.swift in Sources */,
 				790F5CBE279CAEC600B584F0 /* AppConfig.swift in Sources */,
-				38BFD9132915D3B300E3738A /* WishlistView.swift in Sources */,
 				FAE5704228D6CA1500130009 /* FindADentistView.swift in Sources */,
 				38BFD90F2915CCF800E3738A /* ShopContentView.swift in Sources */,
 				FA2747D729076FD100BD04B4 /* EmergencyModel.swift in Sources */,
@@ -800,7 +796,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Firstgrin/Preview Content\"";
-				DEVELOPMENT_TEAM = JAPVDZ486H;
+				DEVELOPMENT_TEAM = 9D4M2F3H7Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Firstgrin/Info.plist;
@@ -834,7 +830,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Firstgrin/Preview Content\"";
-				DEVELOPMENT_TEAM = JAPVDZ486H;
+				DEVELOPMENT_TEAM = 9D4M2F3H7Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Firstgrin/Info.plist;

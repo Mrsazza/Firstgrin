@@ -23,7 +23,6 @@ struct ProductCell: View {
                 .font(Font.system(size: 15, weight: .heavy, design: .rounded))
         }
         .aspectRatio(contentMode: .fit)
-
     }
 }
 

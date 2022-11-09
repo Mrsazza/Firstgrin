@@ -18,12 +18,10 @@ struct CartView: View {
             }
         }
     }
-    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             
             ZStack {
-
                 // Header - "Your Cart"
                 VStack(alignment: .center, spacing: 4) {
                     Text("Your Cart")
@@ -32,7 +30,6 @@ struct CartView: View {
                         .font(Font.system(size: 13, weight: .semibold, design: .rounded))
                         .foregroundColor(Color.gray)
                 }
-                
                 HStack {
                     Spacer()
                     Button(action: {
@@ -49,17 +46,14 @@ struct CartView: View {
                             Image(systemName: "ellipsis")
                             .padding(.trailing, 20)
                         }
-                        
-                    }.foregroundColor(Color(red: 111/255, green: 115/255, blue: 210/255))
+                    }
+                    .foregroundColor(Color(red: 111/255, green: 115/255, blue: 210/255))
                 }
-                
-                
             }
             .padding(.bottom, 10)
             
             ScrollView(.vertical, showsIndicators: true) {
                 // Items in Cart
-                
                 ForEach(items, id: \.uuid) { item in
                     HStack {
                         ProductCartRow(item: item)
@@ -78,7 +72,6 @@ struct CartView: View {
                         }
                     }
                 }
-
                 // Shipping and Total Row
                 HStack(alignment: .center, spacing: 12) {
                     
@@ -107,6 +100,10 @@ struct CartView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
+//                .background {
+//                    Color("orange")
+//                }
+//                .padding(.horizontal, 10)
                 
                 // Checkout Button
                 GeometryReader { geometry in
@@ -119,9 +116,9 @@ struct CartView: View {
                                 Image(systemName: "xmark")
                             }
                             .frame(width: geometry.size.width - 40, height: 60, alignment: .center)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color.black)
                             .font(Font.system(size: 17, weight: .semibold, design: .rounded))
-                            .background(Color.gray)
+                            .background(Color("graywhite"))
                             .cornerRadius(10)
                         } else {
                             HStack(alignment: .center, spacing: 12) {
@@ -131,15 +128,16 @@ struct CartView: View {
                             .frame(width: geometry.size.width - 40, height: 60, alignment: .center)
                             .foregroundColor(Color.white)
                             .font(Font.system(size: 17, weight: .semibold, design: .rounded))
-                            .background(Color(red: 111/255, green: 115/255, blue: 210/255))
+                            .background(Color("orange"))
                             .cornerRadius(10)
-                        }
-                        
+                        }  
                     }
                 }
-                .fixedSize(horizontal: false, vertical: true)
+//                .frame(maxWidth: .infinity, alignment: .center)
+//                .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 20)
-                .padding(.bottom, 100) // Add Space at bottom of Scroll View
+                .padding(.bottom, 50) // Add Space at bottom of Scroll View
+                .padding(.leading, 45)
             }
         }
     }

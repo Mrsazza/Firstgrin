@@ -22,7 +22,6 @@ struct RatingBlock: View {
                     } else {
                         Image(systemName: "star.fill")
                             .foregroundColor(self.primaryColor)
-
                     }
                 } else {
                     Image(systemName: "star")

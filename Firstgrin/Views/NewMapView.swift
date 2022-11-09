@@ -9,14 +9,18 @@ import SwiftUI
 
 struct NewMapView: View {
     @StateObject var parkingFinder = ParkingFinder()
+    @Binding var selectedTab: MapTab
     var body: some View {
         ZStack(alignment: .top) {
             // background
-            Color.white.ignoresSafeArea()
+            Color.white
+//                .ignoresSafeArea()
+                
             // map view
             Map(
                 coordinateRegion: $parkingFinder.region,
-                annotationItems: parkingFinder.spots) { spot in
+                annotationItems: parkingFinder.spots
+            ) { spot in
                 MapAnnotation(
                     coordinate: spot.location,
                     anchorPoint: CGPoint(x: 0.5, y: 0.5)) {
@@ -28,26 +32,28 @@ struct NewMapView: View {
                     })
                 }
             }
-            .cornerRadius(75)
+            .edgesIgnoringSafeArea(.top)
+//            .cornerRadius(75)
             //.frame(height: UIScreen.screenHeight*0.58)
 //            .edgesIgnoringSafeArea(.top)
 //            .offset(y: -70)
             
             VStack {
-                SearchView()
+                SearchView(selectedTab: $selectedTab)
                 // top navigation
 //                TopNavigationView()
                 Spacer()
                 // parking card view
                 ParkingCardView(parkingPlace: parkingFinder.selectedPlace ?? parkingFinder.spots[0])
-                    .offset(y: -30)
+                    .padding(.bottom, 60)
+//                    .offset(y: -30)
                     .onTapGesture {
                         parkingFinder.showDetail = true
                     }
                 // search view
                     //.offset(y: -30)
             }
-            .frame(height: UIScreen.screenHeight*0.7)
+//            .frame(height: UIScreen.screenHeight*0.7)
             .padding(.horizontal)
             
 //            if parkingFinder.showDetail {
@@ -62,11 +68,11 @@ struct NewMapView: View {
     }
 }
 
-struct NewMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewMapView()
-    }
-}
+//struct NewMapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NewMapView()
+//    }
+//}
 
 
 import MapKit
@@ -150,21 +156,49 @@ struct ParkingCardView: View {
 
 struct SearchView: View {
     @State var text: String = ""
+    @EnvironmentObject var realtimeVM: RealtimeViewModel
+    @Binding var selectedTab: MapTab
+    
     var body: some View {
         HStack {
-            Image(systemName: "magnifyingglass")
-                .font(.system(size: 22))
-                .padding()
-            TextField("Search for a doctor", text: $text)
-//            Text("Search a doctor...")
-                .foregroundColor(.gray)
+            HStack {
+                Image(systemName: "magnifyingglass.circle.fill")
+                    .font(.system(size: 22))
+                    .padding()
+                TextField("Search for a doctor", text: $text)
+    //            Text("Search a doctor...")
+                    .foregroundColor(.gray)
+//                Spacer()
+//                Image(systemName: "chevron.left")
+//                    .padding()
+            }
+            //.padding(10)
+            .background(Color.white.shadow(radius: 3))
+            .cornerRadius(20, corners: .allCorners)
+            
             Spacer()
-            Image(systemName: "chevron.left")
-                .padding()
+            
+            
+            Button {
+                selectedTab = .list
+            } label: {
+                Image(systemName: "list.star")
+                    .font(.system(size: 22))
+                    .foregroundColor(.black)
+                    .padding()
+            }
+            .background(
+                Circle()
+                    .foregroundColor(Color.white)
+                    .shadow(radius: 3)
+//                    .cornerRadius(30, corners: .allCorners)
+            )
+//            .padding()
+//            .frame(maxWidth: 50, maxHeight: 50)
         }
-        //.padding(10)
-        .background(Color.white.shadow(radius: 3))
-        .cornerRadius(20, corners: .allCorners)
-
+        .padding(.top, 15)
+        .frame(maxWidth: .infinity, maxHeight: 30)
     }
 }
+
+
