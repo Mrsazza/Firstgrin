@@ -13,17 +13,22 @@ struct ShopView: View {
     @Binding var favorites:[Product]
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 10) {
-                VStack(alignment: .center, spacing: 8) {
-                    ForEach(products, id: \.uuid) { prod in
-                        ProductDetail(product: prod, cart: self.$cart, favorites: self.$favorites)
-                        
+        ZStack {
+            Color.white
+                .ignoresSafeArea(.all)
+            
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 10) {
+                    VStack(alignment: .center, spacing: 8) {
+                        Spacer(minLength: 5)
+                        ForEach(products, id: \.uuid) { prod in
+                            ProductDetail(product: prod, cart: self.$cart, favorites: self.$favorites) 
+                        }
+                        Spacer(minLength: 30)
                     }
-                    Spacer(minLength: 30)
                 }
             }
-        } 
+        }
     }
 }
 

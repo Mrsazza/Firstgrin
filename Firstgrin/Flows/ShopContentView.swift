@@ -42,23 +42,19 @@ struct ShopContentView: View {
                     .frame(maxWidth: .infinity, maxHeight: 36)
                     .foregroundColor(Color("blue"))
                     .padding()
+                    .padding(.horizontal, 15)
                     
                     if selectedTab == .shop {
                         ShopView(products: $data.items, cart: $data.cart, favorites: $data.favorites)
                     } else if selectedTab == .cart {
                         CartView(items: $data.cart)
                     } else {
-//                        WishlistView()
                         ShopView(products: $data.favorites, cart: $data.cart, favorites: $data.favorites)
                     }
                     Spacer()
                 }
                 .navigationTitle("Shop")
                 .navigationBarTitleDisplayMode(.inline)
-//                .background {
-//                    Color("blue")
-//                        .ignoresSafeArea(.all, edges: .all)
-//                }
             }
         }
     }
@@ -89,6 +85,7 @@ struct ShopTopTab: View{
                     .foregroundColor(tab == selectedTab ? Color("orange") : .clear)
                 Text(tab.rawValue)
                     .foregroundColor(tab == selectedTab ? .white : .black)
+                    .font(.custom(Fonts.WorkSansBold, size: 14))
                 
             }
         })

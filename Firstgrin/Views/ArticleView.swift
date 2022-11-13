@@ -11,33 +11,24 @@ struct ArticleView: View {
     @EnvironmentObject var realtimeVM: RealtimeViewModel
     var body: some View {
         NavigationView{
-            ScrollView{
+            ScrollView(showsIndicators: false){
                 ForEach(realtimeVM.articles?.sections ?? [], id: \.id){ section in
-                    VStack{
+                    VStack(spacing: 15) {
                         HStack{
                             Text("\(section.sectionName ?? "")")
-                                .font(.custom(Fonts.WorkSansBold, size: 18))
+                                .font(.custom(Fonts.WorkSansBold, size: 26))
                             Spacer()
                         }
-                        .padding(.horizontal)
-                        .padding(.vertical,8)
                         ArticleSubView(section: section)
-                            .padding(.bottom,10)
                     }
-                }.listStyle(.plain)
+                    .padding(.leading, 20)
+                }
             }
             .navigationTitle("Education")
             .navigationBarTitleDisplayMode(.inline)
-//            .background(Color("blue").ignoresSafeArea())
         }
     }
 }
-
-//struct ArticleView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ArticleView()
-//    }
-//}
 
 struct ArticleSubView: View{
     @State var showSheet = false
@@ -46,20 +37,20 @@ struct ArticleSubView: View{
         ScrollView(.horizontal, showsIndicators: false){
             LazyHStack(spacing: 5){
                 ForEach(section.articleItems ?? [], id:\.id){ article in
-                    ZStack(alignment: .bottomLeading){
-                        ImageUrlView(url: article.itemThumbnail ?? "",width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
-                        // .frame(width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
-                            .cornerRadius(10)
-                            
+                    VStack(alignment: .center, spacing: 0){
+                        ImageUrlView(url: article.itemThumbnail ?? "", width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
+                            .cornerRadius(10, corners: .topRight)
+                            .cornerRadius(10, corners: .topLeft)
                         Text("\(article.itemTitle ?? "")")
-                            .font(.custom(Fonts.WorkSansMedium, size: 14))
-                            .foregroundColor(.white)
-                            .shadow(color: .black, radius: 3, x: 2,y: 2)
+                            .padding(.all,12)
+                            .frame(width: UIScreen.screenWidth * 0.4)
+                            .font(.custom(Fonts.WorkSansBold, size: 14))
+                            .foregroundColor(.black)
                             .multilineTextAlignment(.leading)
                             .lineLimit(2)
-                            .padding(.all,8)
                     }
-                    .frame(width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
+                    .background(Color("offwhite"))
+                    .cornerRadius(10, corners: .allCorners)
                     .onTapGesture {
                         showSheet.toggle()
                     }
@@ -68,72 +59,86 @@ struct ArticleSubView: View{
                     }
                 }
             }
-            .padding(.horizontal)
+//            .padding(.horizontal)
         }
-        Spacer(minLength: 15)
-        
     }
 }
 
 struct ArticleDetailView: View{
     @Environment(\.dismiss) var dismiss
-    var topSectionHeight = UIScreen.screenHeight * 0.3
+    var topSectionHeight = UIScreen.screenHeight * 0.45
+    
     @State var item:ArticleItem
     var body: some View{
-        VStack(alignment: .leading){
+        VStack(alignment: .leading, spacing: 0){
             ScrollView{
                 ZStack{
                     ImageUrlView(url: item.itemThumbnail ?? "",width:UIScreen.screenWidth, height: topSectionHeight)
-                    VStack{
-                        Spacer()
+                            .overlay {
+                                Rectangle()
+                                    .fill(LinearGradient(colors: [Color.clear, Color.cyan.opacity(0.4)], startPoint: .top, endPoint: .bottom))
+                            }
+                            .padding(.top, -35)
+                    VStack {
                         HStack(spacing: -4){
                             Button(action: {
                                 dismiss()
                             }, label: {
                                 Image(systemName: "chevron.left")
-                                
                                 Text("Back")
                                 
                             })
                             Spacer()
                         }
+                       
                         .foregroundColor(.white)
                         .padding()
+                        .padding(.top, 20)
                         Spacer()
-                        Spacer()
-                        Spacer()
+                    }
+                    
+                    VStack {
                         Text(item.itemTitle ?? "")
                             .foregroundColor(.white)
-                            .font(.custom(Fonts.WorkSansBold, size: 24))
-                            .padding(.bottom)
+                            .font(.custom(Fonts.WorkSansMedium, size: 32))
+                            .shadow(radius: 3)
+                            .multilineTextAlignment(.center)
+                            .padding(.all, 30)
+                            .padding(.top, 15)
                     }
                 }
                 .frame(height: topSectionHeight)
                 .padding()
-                VStack(alignment: .leading, spacing: 15){
-                    ForEach(item.articleSections,id: \.id){articles in
-                        if articles.articleSectionHeader != nil {
-                            Text(articles.articleSectionHeader!)
-                                .foregroundColor(.black)
-                                .font(.custom(Fonts.WorkSansMedium, size: 18))
-                            
-                        }
-                        if articles.articleSectionImage != nil {
-                            ImageUrlView(url: articles.articleSectionImage!)
-                                .cornerRadius(10)
-                        }
-                        if !articles.articleSectionText.isEmpty{
-                            ForEach(articles.articleSectionText,  id: \.id){texts in
-                                Text(texts.sectionText.replacingOccurrences(of: "\\n", with: "\n"))
-                                    .font(.custom(Fonts.WorkSansMedium, size: 14))
-                            }
-                        }
-                    }
-                }
-                .padding(.horizontal,30)
+                
+                ArticleDetailsBottom
+                    
             }
         }
         .edgesIgnoringSafeArea(.top)
+    }
+    
+    private var ArticleDetailsBottom : some View {
+        VStack(alignment: .leading, spacing: 15){
+            ForEach(item.articleSections,id: \.id){articles in
+                if articles.articleSectionHeader != nil {
+                    Text(articles.articleSectionHeader!)
+                        .foregroundColor(.black)
+                        .font(.custom(Fonts.WorkSansMedium, size: 18))
+                    
+                }
+                if articles.articleSectionImage != nil {
+                    ImageUrlView(url: articles.articleSectionImage!)
+                        .cornerRadius(10)
+                }
+                if !articles.articleSectionText.isEmpty{
+                    ForEach(articles.articleSectionText,  id: \.id){texts in
+                        Text(texts.sectionText.replacingOccurrences(of: "\\n", with: "\n"))
+                            .font(.custom(Fonts.WorkSansMedium, size: 14))
+                    }
+                }
+            }
+        }
+        .padding(.horizontal,30)
     }
 }
 

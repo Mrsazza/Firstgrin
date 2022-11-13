@@ -100,10 +100,6 @@ struct CartView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
-//                .background {
-//                    Color("orange")
-//                }
-//                .padding(.horizontal, 10)
                 
                 // Checkout Button
                 GeometryReader { geometry in
