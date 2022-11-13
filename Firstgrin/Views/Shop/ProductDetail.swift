@@ -19,8 +19,8 @@ struct ProductDetail: View {
         ZStack {
             Color.white
                 .cornerRadius(20, corners: .allCorners)
-                .padding(3)
-                .shadow(radius: 3)
+//                .padding(3)
+                .shadow(radius: 1)
               
             VStack(alignment: .leading ,spacing: 10) {
                 Button {
@@ -31,9 +31,8 @@ struct ProductDetail: View {
                     product.image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-//                        .frame(maxWidth: UIScreen.screenWidth * 0.7, maxHeight: UIScreen.screenHeight * 0.4)
                         .clipped()
-                        .cornerRadius(20, corners: .allCorners)
+//                        .cornerRadius(20, corners: .allCorners)
                 }
                 VStack(alignment: .leading, spacing: 4) {
                     Text(product.title)
@@ -42,7 +41,6 @@ struct ProductDetail: View {
                         .font(.custom(Fonts.WorkSansBold, size: 26))
                         .foregroundColor(Color("orange"))
                 }
-//                .frame(maxWidth: UIScreen.screenWidth * 0.7)
 
                 HStack(alignment: .center, spacing: 10) {
                     Button(action: {
@@ -124,31 +122,14 @@ struct ProductDetail: View {
                 if isShowingDescriptons {
                     Text(product.description)
                         .font(Font.system(size: 17, weight: .semibold, design: .rounded))
-//                        .frame(maxWidth: UIScreen.screenWidth * 0.7)
                 }
             }
             .padding(.all, 10)
-//            .frame(maxWidth: UIScreen.screenWidth * 0.8)
-//            .cornerRadius(20, corners: .allCorners)
             .sheet(isPresented: $showShareSheet) {
                 ShareSheet(activityItems: ["\(self.product.title) - $\(String(format: "%.2f", self.product.price)) | \(self.product.description.prefix(100))..."])
             }
         }
-        .frame(maxWidth: UIScreen.screenWidth * 0.8)
-        
-        
-
-//        ZStack {
-//            VStack {
-//
-//            }
-//            .background(
-//                RoundedRectangle(cornerRadius: 20, style: .continuous)
-//                    .frame(width: UIScreen.screenWidth * 0.8, height:  UIScreen.screenHeight * 0.5)
-//                    .foregroundColor(Color.white)
-//                    .shadow(color: .black, radius: 1)
-//            )
-//        }
+        .frame(maxWidth: UIScreen.screenWidth * 0.9)
     }
 }
 

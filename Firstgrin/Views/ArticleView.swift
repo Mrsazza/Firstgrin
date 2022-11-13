@@ -11,25 +11,24 @@ struct ArticleView: View {
     @EnvironmentObject var realtimeVM: RealtimeViewModel
     var body: some View {
         NavigationView{
-//            VStack{
-                ScrollView{
-                    ForEach(realtimeVM.articles?.sections ?? [], id: \.id){ section in
-                        VStack{
-                            HStack{
-                                Text("\(section.sectionName ?? "")")
-                                    .font(.headline)
-                                Spacer()
-                            }
-                            .padding(.horizontal)
-                            .padding(.vertical,8)
-                            ArticleSubView(section: section)
-                                .padding(.bottom,10)
+            ScrollView{
+                ForEach(realtimeVM.articles?.sections ?? [], id: \.id){ section in
+                    VStack{
+                        HStack{
+                            Text("\(section.sectionName ?? "")")
+                                .font(.custom(Fonts.WorkSansBold, size: 18))
+                            Spacer()
                         }
-//                    }
+                        .padding(.horizontal)
+                        .padding(.vertical,8)
+                        ArticleSubView(section: section)
+                            .padding(.bottom,10)
+                    }
                 }.listStyle(.plain)
             }
             .navigationTitle("Education")
             .navigationBarTitleDisplayMode(.inline)
+//            .background(Color("blue").ignoresSafeArea())
         }
     }
 }
@@ -45,14 +44,15 @@ struct ArticleSubView: View{
     var section: Sections
     var body: some View{
         ScrollView(.horizontal, showsIndicators: false){
-            LazyHStack(spacing: 10){
+            LazyHStack(spacing: 5){
                 ForEach(section.articleItems ?? [], id:\.id){ article in
                     ZStack(alignment: .bottomLeading){
                         ImageUrlView(url: article.itemThumbnail ?? "",width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
-                           // .frame(width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
+                        // .frame(width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
                             .cornerRadius(10)
+                            
                         Text("\(article.itemTitle ?? "")")
-                            .font(.subheadline)
+                            .font(.custom(Fonts.WorkSansMedium, size: 14))
                             .foregroundColor(.white)
                             .shadow(color: .black, radius: 3, x: 2,y: 2)
                             .multilineTextAlignment(.leading)
@@ -70,6 +70,8 @@ struct ArticleSubView: View{
             }
             .padding(.horizontal)
         }
+        Spacer(minLength: 15)
+        
     }
 }
 
@@ -83,22 +85,26 @@ struct ArticleDetailView: View{
                 ZStack{
                     ImageUrlView(url: item.itemThumbnail ?? "",width:UIScreen.screenWidth, height: topSectionHeight)
                     VStack{
-                        HStack{
-                            Spacer()
+                        Spacer()
+                        HStack(spacing: -4){
                             Button(action: {
                                 dismiss()
                             }, label: {
-                                Image(systemName: "xmark")
-                                    .font(.title2)
-                                    .foregroundColor(.white)
-                                    .padding()
+                                Image(systemName: "chevron.left")
+                                
+                                Text("Back")
+                                
                             })
+                            Spacer()
                         }
+                        .foregroundColor(.white)
+                        .padding()
+                        Spacer()
+                        Spacer()
                         Spacer()
                         Text(item.itemTitle ?? "")
-                            .font(.title3)
-                            .bold()
                             .foregroundColor(.white)
+                            .font(.custom(Fonts.WorkSansBold, size: 24))
                             .padding(.bottom)
                     }
                 }
@@ -108,7 +114,9 @@ struct ArticleDetailView: View{
                     ForEach(item.articleSections,id: \.id){articles in
                         if articles.articleSectionHeader != nil {
                             Text(articles.articleSectionHeader!)
-                                .font(.title2)
+                                .foregroundColor(.black)
+                                .font(.custom(Fonts.WorkSansMedium, size: 18))
+                            
                         }
                         if articles.articleSectionImage != nil {
                             ImageUrlView(url: articles.articleSectionImage!)
@@ -117,7 +125,7 @@ struct ArticleDetailView: View{
                         if !articles.articleSectionText.isEmpty{
                             ForEach(articles.articleSectionText,  id: \.id){texts in
                                 Text(texts.sectionText.replacingOccurrences(of: "\\n", with: "\n"))
-                                    .font(.body)
+                                    .font(.custom(Fonts.WorkSansMedium, size: 14))
                             }
                         }
                     }
@@ -125,6 +133,7 @@ struct ArticleDetailView: View{
                 .padding(.horizontal,30)
             }
         }
+        .edgesIgnoringSafeArea(.top)
     }
 }
 

@@ -13,6 +13,9 @@ struct EmergencyContentView: View {
     var body: some View {
         NavigationView {
             ZStack{
+                Color("blue")
+                    .ignoresSafeArea(.all)
+                
                 VStack{
                     HeaderTitle
                     EmergencyRow
@@ -30,14 +33,19 @@ struct EmergencyContentView: View {
     /// Header title
     private var HeaderTitle: some View {
         HStack(alignment: .top) {
-            Text("Emergency").font(.largeTitle).bold()
+            Text("Emergency")
+                .font(.custom(Fonts.WorkSansBold, size: 28))
+                .foregroundColor(.red)
             Spacer()
             Button {
                 manager.fullScreenMode = nil
             } label: {
-                Image(systemName: "xmark").font(.system(size: 18, weight: .medium))
+                Image(systemName: "xmark")
+                    .font(.custom(Fonts.WorkSansBold, size: 24))
+                    .foregroundColor(.red)
             }
-        }.padding(.horizontal).foregroundColor(Color("TextColor"))
+        }
+        .padding(.horizontal)
     }
     // Emergency Row
     private var EmergencyRow: some View{
@@ -45,6 +53,7 @@ struct EmergencyContentView: View {
             ForEach (realtimeVM.emergency?.emergencyRow ?? [], id:\.id){ row in
                 VStack(alignment: .leading){
                     Text(row.emergencyRowTitle ?? "")
+                        .font(.custom(Fonts.WorkSansBold, size: 18))
                     EmergencyGridView(emergencyRow: row)
                 }
                 .padding()
@@ -60,20 +69,26 @@ struct EmergencyGridView: View {
     ]
     var emergencyRow: EmergencyRow
     var body: some View {
-            LazyVGrid(columns: columns, spacing: 20) {
+            LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(emergencyRow.emergencySection ?? [], id: \.id) { item in
                     NavigationLink(destination: EmergencyMessageView(emergencySection: item)){
-                        ZStack{
+                        ZStack(alignment: .bottom){
                             ImageUrlView(url: item.emergencySectionImage ?? "", width: UIScreen.screenWidth * 0.4, height: UIScreen.screenHeight*0.3)
                                 .frame(height: UIScreen.screenHeight*0.3)
                                 .cornerRadius(20, corners: .allCorners)
                             Text(item.emergencySectionTitle ?? "")
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
+                                .font(.custom(Fonts.WorkSansMedium, size: 14))
+                                .padding(.bottom, 10)
                         }
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundColor(.white)
+                                .shadow(radius: 1)
+                        )
                     }
                 }
             }
-            .padding(.horizontal)
     }
 }
 
@@ -87,16 +102,16 @@ struct EmergencyMessageView: View{
     var body: some View{
         ScrollView{
             Text(emergencySection.emergencySectionMessage?.replacingOccurrences(of: "\\n", with: "\n") ?? "")
-                .font(.system(size: 14, weight: .regular,design: .rounded))
+                .font(.custom(Fonts.WorkSansMedium, size: 14))
                 .padding()
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(emergencySection.emergencyArticles ?? [], id: \.id) { article in
-                    ZStack(alignment: .bottomLeading){
+                    ZStack(alignment: .bottom){
                         ImageUrlView(url: article.itemThumbnail ?? "",width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
                             .frame(width: UIScreen.screenWidth * 0.4, height: UIScreen.screenWidth * 0.5)
                             .cornerRadius(10)
                         Text("\(article.itemTitle ?? "")")
-                            .font(.subheadline)
+                            .font(.custom(Fonts.WorkSansBold, size: 18))
                             .foregroundColor(.white)
                             .shadow(color: .black, radius: 3, x: 2,y: 2)
                             .multilineTextAlignment(.leading)

@@ -9,5 +9,6 @@ import SwiftUI
 
 struct Fonts{
     static let WorkSansBold = "WorkSans-Bold"
+    static let WorkSansMedium = "WorkSans-Medium"
 }
 
