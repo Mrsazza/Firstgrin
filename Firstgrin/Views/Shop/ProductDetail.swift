@@ -11,163 +11,145 @@ struct ProductDetail: View {
     var product:Product
     @Binding var cart:[Product]
     @Binding var favorites:[Product]
-    
     @State private var showShareSheet = false
-    
     @Environment(\.presentationMode) var presentationMode
+    @State var isShowingDescriptons : Bool = false
     
     var body: some View {
-        VStack {
+        ZStack {
+            Color.white
+                .cornerRadius(20, corners: .allCorners)
+                .padding(3)
+                .shadow(radius: 3)
+              
+            VStack(alignment: .leading ,spacing: 10) {
                 Button {
-                    presentationMode.wrappedValue.dismiss()
+                    withAnimation {
+                        isShowingDescriptons.toggle()
+                    }
                 } label: {
-                    HStack {
-                        Image(systemName: "chevron.left")
-                        Text("Back")
-                        
-                    }
-                }
-                .frame(maxWidth: .infinity,alignment: .topLeading)
-            
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 8) {
                     product.image
-                    .resizable()
-                    .scaledToFill()
-                        .cornerRadius(15)
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(product.title)
-                            .font(Font.system(size: 24, weight: .semibold, design: .rounded))
-                        Text("$\(String(format: "%.2f", product.price))")
-                            .font(Font.system(size: 19, weight: .semibold, design: .rounded))
-                    }
-                    
-                    HStack(alignment: .center, spacing: 0) {
-                        Button(action: {
-                            if self.favorites.contains(where: { (fav) -> Bool in
-                                fav.uuid == self.product.uuid
-                            }) {
-                                self.favorites.removeAll { (fav) -> Bool in
-                                    fav.uuid == self.product.uuid
-                                }
-                            } else {
-                                self.favorites.append(self.product)
-                            }
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+//                        .frame(maxWidth: UIScreen.screenWidth * 0.7, maxHeight: UIScreen.screenHeight * 0.4)
+                        .clipped()
+                        .cornerRadius(20, corners: .allCorners)
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(product.title)
+                        .font(.custom(Fonts.WorkSansBold, size: 18))
+                    Text("$\(String(format: "%.2f", product.price))")
+                        .font(.custom(Fonts.WorkSansBold, size: 26))
+                        .foregroundColor(Color("orange"))
+                }
+//                .frame(maxWidth: UIScreen.screenWidth * 0.7)
+
+                HStack(alignment: .center, spacing: 10) {
+                    Button(action: {
+                        if self.favorites.contains(where: { (fav) -> Bool in
+                            fav.uuid == self.product.uuid
                         }) {
-                            if self.favorites.contains(where: { (fav) -> Bool in
-                                fav.uuid == product.uuid
-                            }) {
-                                Image(systemName: "heart.fill")
+                            self.favorites.removeAll { (fav) -> Bool in
+                                fav.uuid == self.product.uuid
+                            }
+                        } else {
+                            self.favorites.append(self.product)
+                        }
+                    }) {
+                        if self.favorites.contains(where: { (fav) -> Bool in
+                            fav.uuid == product.uuid
+                        }) {
+                            Image(systemName: "heart.fill")
                                 .foregroundColor(Color.red)
                                 .frame(width: 40, height: 40, alignment: .center)
                                 .background(Color.gray.opacity(0.2))
                                 .cornerRadius(10)
-                            } else {
-                                Image(systemName: "heart")
+                        } else {
+                            Image(systemName: "heart")
                                 .foregroundColor(Color.black)
                                 .frame(width: 40, height: 40, alignment: .center)
                                 .background(Color.gray.opacity(0.2))
                                 .cornerRadius(10)
-                            }
                         }
-                        Spacer()
-                        Button(action: {
-                            self.showShareSheet = !self.showShareSheet
-                        }) {
-                            Image(systemName: "square.and.arrow.up")
+                    }
+                   
+                    Button(action: {
+                        self.showShareSheet = !self.showShareSheet
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
                             .foregroundColor(Color.black)
                             .frame(width: 40, height: 40, alignment: .center)
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(10)
-                        }
-                        Spacer()
-                        Spacer()
-                        Button(action: {
-                            if self.cart.contains(where: { (prod) -> Bool in
-                                prod.uuid == self.product.uuid
-                            }) {
-                                self.cart.removeAll { (prod) -> Bool in
-                                    prod.uuid == self.product.uuid
-                                }
-                            } else {
-                                self.cart.append(self.product)
-                            }
+                    }
+
+                    Spacer()
+
+                    Button(action: {
+                        if self.cart.contains(where: { (prod) -> Bool in
+                            prod.uuid == self.product.uuid
                         }) {
-                            if self.cart.contains(where: { (prod) -> Bool in
+                            self.cart.removeAll { (prod) -> Bool in
                                 prod.uuid == self.product.uuid
-                            }) {
-                                HStack(alignment: .center, spacing: 20) {
-                                    Text("IN YOUR CART")
-                                    Image(systemName: "checkmark")
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .foregroundColor(Color.white)
-                                .font(Font.system(size: 17, weight: .semibold, design: .rounded))
-                                .background(Color("orange"))
-                                .cornerRadius(10)
-                            } else {
-                                HStack(alignment: .center, spacing: 20) {
-                                    Text("ADD TO CART")
-                                    Image(systemName: "cart.fill")
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .foregroundColor(Color.white)
-                                .font(Font.system(size: 17, weight: .semibold, design: .rounded))
-                                .background(Color(red: 111/255, green: 115/255, blue: 210/255))
-                                .cornerRadius(10)
                             }
+                        } else {
+                            self.cart.append(self.product)
                         }
-                    }
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 10)
-                    
-                    Text(product.description)
-                        .font(Font.system(size: 17, weight: .semibold, design: .rounded))
-                    
-                    Divider()
-                    
-                    // Review Overview Block
-                    VStack {
-                        Text("Reviews")
-                            .font(Font.system(size: 19, weight: .semibold, design: .rounded))
-                        Text("\(product.reviews.count) review\(product.reviews.count == 1 ? "" : "s")")
-                            .font(Font.system(size: 14, weight: .semibold, design: .rounded))
-                            .foregroundColor(Color.gray)
-                    }
-                    RatingBlock(rating: product.rating, primaryColor: Color.yellow, secondaryColor: Color.gray)
-                    Divider()
-                    
-                    // Individual Review Blocks
-                    VStack {
-                        ForEach(self.product.reviews.indices) { i in
-                            HStack{
-                                Text("\(self.product.reviews[i].name)")
-                                    .font(Font.system(size: 17, weight: .semibold, design: .rounded))
-                                Spacer()
-                                RatingBlock(rating: self.product.reviews[i].rating, primaryColor: Color.yellow, secondaryColor: Color.gray)
+                    }) {
+                        if self.cart.contains(where: { (prod) -> Bool in
+                            prod.uuid == self.product.uuid
+                        }) {
+                            HStack(alignment: .center, spacing: 20) {
+                                Image(systemName: "checkmark")
                             }
-                            Text("\(self.product.reviews[i].content)")
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+                            .foregroundColor(Color.white)
+                            .font(Font.system(size: 17, weight: .semibold, design: .rounded))
+                            .background(Color("orange"))
+                            .cornerRadius(10)
+                        } else {
+                            HStack(alignment: .center, spacing: 20) {
+                                Image(systemName: "cart.fill")
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+                            .foregroundColor(Color.white)
+                            .font(Font.system(size: 17, weight: .semibold, design: .rounded))
+                            .background(Color(red: 111/255, green: 115/255, blue: 210/255))
+                            .cornerRadius(10)
                         }
                     }
                 }
-//                .padding(.top, 10)
-//                .padding(.bottom, 70)
+                if isShowingDescriptons {
+                    Text(product.description)
+                        .font(Font.system(size: 17, weight: .semibold, design: .rounded))
+//                        .frame(maxWidth: UIScreen.screenWidth * 0.7)
+                }
+            }
+            .padding(.all, 10)
+//            .frame(maxWidth: UIScreen.screenWidth * 0.8)
+//            .cornerRadius(20, corners: .allCorners)
+            .sheet(isPresented: $showShareSheet) {
+                ShareSheet(activityItems: ["\(self.product.title) - $\(String(format: "%.2f", self.product.price)) | \(self.product.description.prefix(100))..."])
             }
         }
-        .padding(.all, 20)
-        .edgesIgnoringSafeArea(.bottom)
-        .sheet(isPresented: $showShareSheet) {
-            ShareSheet(activityItems: ["\(self.product.title) - $\(String(format: "%.2f", self.product.price)) | \(self.product.description.prefix(100))..."])
-        }
+        .frame(maxWidth: UIScreen.screenWidth * 0.8)
+        
+        
 
+//        ZStack {
+//            VStack {
+//
+//            }
+//            .background(
+//                RoundedRectangle(cornerRadius: 20, style: .continuous)
+//                    .frame(width: UIScreen.screenWidth * 0.8, height:  UIScreen.screenHeight * 0.5)
+//                    .foregroundColor(Color.white)
+//                    .shadow(color: .black, radius: 1)
+//            )
+//        }
     }
 }
 
-//struct ProductDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProductDetail()
-//    }
-//}
+
